@@ -1,0 +1,44 @@
+---
+title: "streamwater"
+output: html_document
+author: Mia Forsline, Desik Somasundaram, Alex Vand 
+date: 2021-08-25 
+---
+
+# Read in the data 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(here)
+library(janitor)
+library(ggplot2)
+
+qc1 <- read_csv("/courses/EDS214/eds214-dammad-coders/data/raw_data/RawData/QuebradaCuenca1-Bisley.csv", na = c("-9999", "-9999.00", "-9999.0")) %>% 
+  clean_names()
+
+qc2 <- read_csv("/courses/EDS214/eds214-dammad-coders/data/raw_data/RawData/QuebradaCuenca2-Bisley.csv", na = c("-9999", "-9999.00", "-9999.0")) %>% 
+  clean_names()
+```
+
+# Clean/wrangle the data 
+```{r}
+qc1_clean <- qc1 %>% 
+  select(sample_id, code, sample_date, k, no3) %>% 
+  mutate(sample_date = lubridate::mdy(sample_date)) %>% 
+  rename(k_mg_L = k, no3_ug_L = no3)
+
+qc2_clean <- qc2 %>% 
+  select(sample_id, code, sample_date, k, no3) %>% 
+  mutate(sample_date = lubridate::mdy_hm(sample_date)) %>% 
+  rename(k_mg_L = k, no3_ug_L = no3)
+
+qc_combined <- rbind(qc1_clean, qc2_clean)
+```
+
+# Plotting the data 
+```{r}
+ggplot(data = qc_combined, aes(x = sample_date, y = k_mg_L))+
+  geom_line(aes(color = sample_id))+
+  theme_classic()
+```
+
