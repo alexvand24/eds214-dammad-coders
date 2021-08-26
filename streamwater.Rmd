@@ -15,6 +15,8 @@ Stream water data collected weekly from 1988 to 2012 at Luquillo Mountain in Pue
 
 Our research focuses on comparing K and NO3 concentrations at the different sites before and after Hurricane Hugo in September 1989.
 
+
+# Attach required packages
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
@@ -26,7 +28,7 @@ library(patchwork)
 ```
 
 
-# Read in the data
+# Read in the data, identifying unique NA values
 ```{r}
 qc1 <- read_csv("/courses/EDS214/eds214-dammad-coders/data/raw_data/QuebradaCuenca1-Bisley.csv", na = c("-9999", "-9999.00", "-9999.0")) %>% 
   clean_names()
@@ -42,7 +44,11 @@ mpr <- read_csv("/courses/EDS214/eds214-dammad-coders/data/raw_data/RioMameyesPu
 ```
 
 
-# Clean/wrangle the data 
+# Clean/wrangle the data
+- Select variables (columns) of interest
+- Converted the date to ISO 8601 format
+- Renamed columns to include units
+- Combined all four datasets
 ```{r}
 qc1_clean <- qc1 %>% 
   select(sample_id, code, sample_date, k, no3) %>% 
@@ -66,21 +72,32 @@ mpr_clean <- mpr %>%
 
 
 
-combined_sites <- rbind(qc1_clean, qc2_clean, qc3_clean, mpr_clean)
+combined_sites <- rbind(qc1_clean, qc2_clean, qc3_clean, mpr_clean) %>% 
+  rename(site_id = sample_id) %>%
+  mutate(year = lubridate::year(sample_date))
+  
+  
+combined_summary <- combined_sites %>% 
+  group_by(site_id, year) %>% 
+  summarize(mean_k = mean(k_mg_L, na.rm = TRUE),
+            mean_no3 = mean(no3_ug_L, na.rm = TRUE))
 ```
 
-# Plotting the data 
+# Plotting the data
+- Created one plot for K and another for NO3
+- Created an aggregated graph using the `patchwork` package!
 ```{r}
 k <- ggplot(data = combined_sites, aes(x = sample_date, y = k_mg_L))+
-  geom_line(aes(color = sample_id),
+  geom_line(aes(color = site_id),
             show.legend = FALSE)+
   theme_classic()+
   theme(axis.title.x = element_blank())+
   labs(y = "K (mg/L)",
-       color = "Sites")
+       color = "Sites",
+       title = "TITLE")
 
 n <- ggplot(data = combined_sites, aes(x = sample_date, y = no3_ug_L))+
-  geom_line(aes(color = sample_id)) +
+  geom_line(aes(color = site_id)) +
   theme_classic()+
   labs(x = "Year",
        y = expression(paste(NO[3]-N, " ",(mu *g/L))),
@@ -88,6 +105,34 @@ n <- ggplot(data = combined_sites, aes(x = sample_date, y = no3_ug_L))+
 
 k / n
 ```
+
+
+## summary plot
+
+```{r}
+k_summary_plot <- ggplot(data = combined_summary, aes(x = year,
+                                                      y = mean_k))+
+  geom_point(aes(color = site_id, shape = site_id),
+            show.legend = FALSE) +
+  geom_line(aes(color = site_id)) +
+  theme_classic() +
+  theme(axis.title.x = element_blank())+
+  labs(y = "K (mg/L)",
+       color = "Sites",
+       title = "TITLE")
+
+n_summary_plot <- ggplot(data = combined_summary, aes(x = year, y = mean_no3)) +
+  geom_point(aes(color = site_id, shape = site_id)) +
+  geom_line(aes(color = site_id)) +
+  theme_classic() +
+  labs(x = "Year",
+       y = expression(paste(NO[3]-N, " ",(mu *g/L))),
+       color = "Sites")
+
+k_summary_plot / n_summary_plot
+```
+
+
 
 # Collaborative workflow
 
@@ -110,5 +155,11 @@ Alex Vand created the github repository. Desik Somasundaram and Mia Forsline clo
 Our group used the pair programming approach with one driver and two navigators. The navigators searched online to support the driver and also examined the metadata to ensure consistency and accuracy among the different datasets.
 
 
-
+# To Do
+- title
+- results/ analysis
+- challenges
+- clean excess code/ document
+- add images
+- fix legend(s)
 
