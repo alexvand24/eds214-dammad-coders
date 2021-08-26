@@ -1,11 +1,20 @@
 ---
-title: "streamwater"
-output: html_document
-author: Mia Forsline, Desik Somasundaram, Alex Vand 
-date: 2021-08-25 
+title: "Streamwater Data"
+output:
+  html_document:
+      code_folding: show
+author: Mia Forsline, Desik Somasundaram, Alex Vand
+date: 2021-08-25
 ---
 
-# Read in the data 
+Contact: mforsline@bren.ucsb.edu, asy@bren.ucsb.edu, desik@bren.ucsb.edu
+
+
+# Background Information & Objective
+Stream water data collected weekly from 1988 to 2012 at Luquillo Mountain in Puerto Rico, including data after Hurricane Hugo in September 1989. This data includes potassium concentration (milligrams per liter) and nitrate (micrograms per liter) concentration from four different sites.
+
+Our research focuses on comparing K and NO3 concentrations at the different sites before and after Hurricane Hugo in September 1989.
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
@@ -14,6 +23,11 @@ library(janitor)
 library(ggplot2)
 library(patchwork)
 
+```
+
+
+# Read in the data
+```{r}
 qc1 <- read_csv("/courses/EDS214/eds214-dammad-coders/data/raw_data/QuebradaCuenca1-Bisley.csv", na = c("-9999", "-9999.00", "-9999.0")) %>% 
   clean_names()
 
@@ -25,8 +39,8 @@ qc3 <- read_csv("/courses/EDS214/eds214-dammad-coders/data/raw_data/QuebradaCuen
 
 mpr <- read_csv("/courses/EDS214/eds214-dammad-coders/data/raw_data/RioMameyesPuenteRoto.csv", na = c("-9999", "-9999.00", "-9999.0")) %>% 
   clean_names()
-
 ```
+
 
 # Clean/wrangle the data 
 ```{r}
@@ -59,7 +73,7 @@ combined_sites <- rbind(qc1_clean, qc2_clean, qc3_clean, mpr_clean)
 ```{r}
 k <- ggplot(data = combined_sites, aes(x = sample_date, y = k_mg_L))+
   geom_line(aes(color = sample_id),
-            show_guide = FALSE)+
+            show.legend = FALSE)+
   theme_classic()+
   theme(axis.title.x = element_blank())+
   labs(y = "K (mg/L)",
@@ -69,9 +83,32 @@ n <- ggplot(data = combined_sites, aes(x = sample_date, y = no3_ug_L))+
   geom_line(aes(color = sample_id)) +
   theme_classic()+
   labs(x = "Year",
-       y = expression(paste(NO[3]-N, " (ug/L)")),
+       y = expression(paste(NO[3]-N, " ",(mu *g/L))),
        color = "Sites") 
 
 k / n
 ```
+
+# Collaborative workflow
+
+Data is stored on our shared server at Bren (Taylor) and our repository is git-controlled on github and enabled us to access through our personal accounts on the Taylor server.
+
+### Initial approach
+image
+
+### Final approach
+image
+
+
+## Git workflow
+
+Alex Vand created the github repository. Desik Somasundaram and Mia Forsline cloned the repo and made changes on their virtual machine account and then pushed changes back to the github repo.
+
+
+## Pair programming
+
+Our group used the pair programming approach with one driver and two navigators. The navigators searched online to support the driver and also examined the metadata to ensure consistency and accuracy among the different datasets.
+
+
+
 
