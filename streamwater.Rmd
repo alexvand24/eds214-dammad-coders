@@ -13,11 +13,18 @@ library(here)
 library(janitor)
 library(ggplot2)
 
-qc1 <- read_csv("/courses/EDS214/eds214-dammad-coders/data/raw_data/RawData/QuebradaCuenca1-Bisley.csv", na = c("-9999", "-9999.00", "-9999.0")) %>% 
+qc1 <- read_csv("/courses/EDS214/eds214-dammad-coders/data/raw_data/QuebradaCuenca1-Bisley.csv", na = c("-9999", "-9999.00", "-9999.0")) %>% 
   clean_names()
 
-qc2 <- read_csv("/courses/EDS214/eds214-dammad-coders/data/raw_data/RawData/QuebradaCuenca2-Bisley.csv", na = c("-9999", "-9999.00", "-9999.0")) %>% 
+qc2 <- read_csv("/courses/EDS214/eds214-dammad-coders/data/raw_data/QuebradaCuenca2-Bisley.csv", na = c("-9999", "-9999.00", "-9999.0")) %>% 
   clean_names()
+
+qc3 <- read_csv("/courses/EDS214/eds214-dammad-coders/data/raw_data/QuebradaCuenca3-Bisley.csv", na = c("-9999", "-9999.00", "-9999.0")) %>% 
+  clean_names()
+
+mpr <- read_csv("/courses/EDS214/eds214-dammad-coders/data/raw_data/RioMameyesPuenteRoto.csv", na = c("-9999", "-9999.00", "-9999.0")) %>% 
+  clean_names()
+
 ```
 
 # Clean/wrangle the data 
@@ -32,12 +39,24 @@ qc2_clean <- qc2 %>%
   mutate(sample_date = lubridate::mdy_hm(sample_date)) %>% 
   rename(k_mg_L = k, no3_ug_L = no3)
 
-qc_combined <- rbind(qc1_clean, qc2_clean)
+qc3_clean <- qc3 %>% 
+  select(sample_id, code, sample_date, k, no3) %>% 
+  mutate(sample_date = lubridate::ymd(sample_date)) %>% 
+  rename(k_mg_L = k, no3_ug_L = no3)
+
+mpr_clean <- mpr %>% 
+  select(sample_id, code, sample_date, k, no3) %>% 
+  mutate(sample_date = lubridate::mdy(sample_date)) %>% 
+  rename(k_mg_L = k, no3_ug_L = no3)
+
+
+
+combined_sites <- rbind(qc1_clean, qc2_clean, qc3_clean, mpr_clean)
 ```
 
 # Plotting the data 
 ```{r}
-ggplot(data = qc_combined, aes(x = sample_date, y = k_mg_L))+
+ggplot(data = combined_sites, aes(x = sample_date, y = k_mg_L))+
   geom_line(aes(color = sample_id))+
   theme_classic()
 ```
