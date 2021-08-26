@@ -61,8 +61,8 @@ k <- ggplot(data = combined_sites, aes(x = sample_date, y = k_mg_L))+
   geom_line(aes(color = sample_id),
             show_guide = FALSE)+
   theme_classic()+
-  labs(x = "Year",
-       y = "K (mg/L)",
+  theme(axis.title.x = element_blank())+
+  labs(y = "K (mg/L)",
        color = "Sites")
 
 n <- ggplot(data = combined_sites, aes(x = sample_date, y = no3_ug_L))+
