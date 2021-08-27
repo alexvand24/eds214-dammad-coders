@@ -18,7 +18,7 @@ Our research focuses on comparing K and NO3 concentrations at the different site
 
 
 
-# Collaborative workflow
+## Collaborative workflow
 
 The raw data is stored on our shared server at Bren (Taylor). Our project repository is git-controlled on github, which we can access through our personal accounts on the Taylor server.
 
@@ -50,11 +50,17 @@ We also had some issues with the remote server lagging which required killing ac
 The collaborative workflow was a new experience for our team so we had to get acquainted with everyone's pace and learn to speak in technical language that is easy to understand for everyone in the group, especially during pair programming.
 
 
+<<<<<<< HEAD
 # Code
 
 ## Attach required packages
 ```{r setup, message = FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+=======
+## Attach required packages
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+>>>>>>> e13acf76fb3242a1aa576477c0003bf5679d189c
 library(tidyverse)
 library(here)
 library(janitor)
@@ -175,6 +181,7 @@ k_summary_plot / n_summary_plot
 ```
 
 
+<<<<<<< HEAD
 ## Results & Analysis
 
 Streamwater chemistry variance appears to be correlated with external factors, such as extreme weather events. We see a spike in potassium and nitrate concentrations at all four sites around 1990, coinciding with Hurricane Hugo, which occurred in September 1989. There is another distinct peak in nitrate concentration (specifically at MPR) around 1998, which corresponds with Hurricane Georges.
@@ -186,13 +193,4 @@ Nitrate concentration data was not consistently collected from July 1994 to Octo
 ## Further Research
 
 We are interested to determine the statistical significance of our findings and to further explore hypotheses for the high potassium concentration and low nitrate concentration around 1993. Furthermore, would like to expand this research with the most current data.
-
-
-
-
-
-
-
-
-
 
