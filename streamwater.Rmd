@@ -23,10 +23,7 @@ Our research focuses on comparing K and NO3 concentrations at the different site
 Data is stored on our shared server at Bren (Taylor) and our repository is git-controlled on github and enabled us to access through our personal accounts on the Taylor server.
 
 ### Initial approach
-```{r}
-!(images/oldworkflow.jpg)
-```
-
+![Old Workflow.](/images/oldworkflow.jpg)
 
 
 ### Final approach
