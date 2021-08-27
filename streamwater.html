@@ -184,7 +184,7 @@ pre code {
 </div>
 
 
-<p>Contact: <a href="mailto:mforsline@bren.ucsb.edu" class="email">mforsline@bren.ucsb.edu</a>, <a href="mailto:asy@bren.ucsb.edu" class="email">asy@bren.ucsb.edu</a>, <a href="mailto:desik@bren.ucsb.edu" class="email">desik@bren.ucsb.edu</a></p>
+<p>Contact: <a href="mailto:mforsline@bren.ucsb.edu" class="email">mforsline@bren.ucsb.edu</a>, <a href="mailto:desik@bren.ucsb.edu" class="email">desik@bren.ucsb.edu</a>, <a href="mailto:asy@bren.ucsb.edu" class="email">asy@bren.ucsb.edu</a></p>
 <div id="background-information-objective" class="section level1">
 <h1>Background Information &amp; Objective</h1>
 <p>Stream water data collected weekly from 1988 to 2012 at Luquillo Mountain in Puerto Rico, including data after Hurricane Hugo in September 1989. This data includes potassium concentration (milligrams per liter) and nitrate (micrograms per liter) concentration from four different sites.</p>
@@ -232,7 +232,8 @@ library(patchwork)</code></pre>
 </div>
 <div id="read-in-the-data-identifying-unique-na-values" class="section level2">
 <h2>Read in the data, identifying unique NA values</h2>
-<pre class="r"><code>qc1 &lt;- read_csv(&quot;/courses/EDS214/eds214-dammad-coders/data/raw_data/QuebradaCuenca1-Bisley.csv&quot;, na = c(&quot;-9999&quot;, &quot;-9999.00&quot;, &quot;-9999.0&quot;)) %&gt;% 
+<pre class="r"><code># Make for loop here
+qc1 &lt;- read_csv(&quot;/courses/EDS214/eds214-dammad-coders/data/raw_data/QuebradaCuenca1-Bisley.csv&quot;, na = c(&quot;-9999&quot;, &quot;-9999.00&quot;, &quot;-9999.0&quot;)) %&gt;% 
   clean_names()
 
 qc2 &lt;- read_csv(&quot;/courses/EDS214/eds214-dammad-coders/data/raw_data/QuebradaCuenca2-Bisley.csv&quot;, na = c(&quot;-9999&quot;, &quot;-9999.00&quot;, &quot;-9999.0&quot;)) %&gt;% 
@@ -252,7 +253,8 @@ mpr &lt;- read_csv(&quot;/courses/EDS214/eds214-dammad-coders/data/raw_data/RioM
 <li>Renamed columns to include units</li>
 <li>Combined all four datasets</li>
 </ul>
-<pre class="r"><code>qc1_clean &lt;- qc1 %&gt;% 
+<pre class="r"><code># make a for loop here
+qc1_clean &lt;- qc1 %&gt;% 
   select(sample_id, code, sample_date, k, no3) %&gt;% 
   mutate(sample_date = lubridate::mdy(sample_date)) %&gt;% 
   rename(k_mg_L = k, no3_ug_L = no3)

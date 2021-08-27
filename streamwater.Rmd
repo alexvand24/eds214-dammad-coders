@@ -7,7 +7,7 @@ author: Mia Forsline, Desik Somasundaram, Alex Vand
 date: 2021-08-27
 ---
 
-Contact: mforsline@bren.ucsb.edu, asy@bren.ucsb.edu, desik@bren.ucsb.edu
+Contact: mforsline@bren.ucsb.edu, desik@bren.ucsb.edu, asy@bren.ucsb.edu
 
 
 # Background Information & Objective
@@ -63,6 +63,7 @@ library(patchwork)
 
 ## Read in the data, identifying unique NA values
 ```{r}
+# Make for loop here
 qc1 <- read_csv("/courses/EDS214/eds214-dammad-coders/data/raw_data/QuebradaCuenca1-Bisley.csv", na = c("-9999", "-9999.00", "-9999.0")) %>% 
   clean_names()
 
@@ -83,6 +84,7 @@ mpr <- read_csv("/courses/EDS214/eds214-dammad-coders/data/raw_data/RioMameyesPu
 - Renamed columns to include units
 - Combined all four datasets
 ```{r}
+# make a for loop here
 qc1_clean <- qc1 %>% 
   select(sample_id, code, sample_date, k, no3) %>% 
   mutate(sample_date = lubridate::mdy(sample_date)) %>% 
