@@ -50,7 +50,7 @@ The collaborative workflow was a new experience for our team so we had to get ac
 
 
 ## Attach required packages
-```{r setup, include=FALSE}
+```{r setup, warning=FALSE, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 library(tidyverse)
 library(here)
@@ -139,6 +139,13 @@ n <- ggplot(data = combined_sites, aes(x = sample_date, y = no3_ug_L))+
 k / n
 ```
 
+## Site map
+![Schaefer et. al. 2000](images/PR-LTER-Map.PNG)
+
+## Hurricane paths from 1988 to 2012
+![NOAA Hurricane Tracker](images/hurricane_map.PNG)
+
+![NOAA Hurricane Tracker](images/table.PNG)
 
 ## Summary plot
 
@@ -169,13 +176,6 @@ n_summary_plot <- ggplot(data = combined_summary, aes(x = year,
 k_summary_plot / n_summary_plot
 ```
 
-## Hurricane paths from 1988 to 2012
-![](images/hurricane_map.PNG)
-
-![](images/table.PNG)
-
-## Site map
-![](images/PR-LTER-Map.PNG)
 
 ## Results & Analysis
 
