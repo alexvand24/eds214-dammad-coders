@@ -4,7 +4,7 @@ output:
   html_document:
       code_folding: show
 author: Mia Forsline, Desik Somasundaram, Alex Vand
-date: 2021-08-25
+date: 2021-08-27
 ---
 
 Contact: mforsline@bren.ucsb.edu, asy@bren.ucsb.edu, desik@bren.ucsb.edu
@@ -49,7 +49,7 @@ We also had some issues with the remote server lagging which required killing ac
 The collaborative workflow was a new experience for our team so we had to get acquainted with everyone's pace and learn to speak in technical language that is easy to understand for everyone in the group, especially during pair programming.
 
 
-# Attach required packages
+## Attach required packages
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
@@ -61,7 +61,7 @@ library(patchwork)
 ```
 
 
-# Read in the data, identifying unique NA values
+## Read in the data, identifying unique NA values
 ```{r}
 qc1 <- read_csv("/courses/EDS214/eds214-dammad-coders/data/raw_data/QuebradaCuenca1-Bisley.csv", na = c("-9999", "-9999.00", "-9999.0")) %>% 
   clean_names()
@@ -77,7 +77,7 @@ mpr <- read_csv("/courses/EDS214/eds214-dammad-coders/data/raw_data/RioMameyesPu
 ```
 
 
-# Clean/wrangle the data
+## Clean/wrangle the data
 - Select variables (columns) of interest
 - Converted the date to ISO 8601 format
 - Renamed columns to include units
@@ -116,7 +116,7 @@ combined_summary <- combined_sites %>%
             mean_no3 = mean(no3_ug_L, na.rm = TRUE))
 ```
 
-# Plotting the data
+## Plotting the data
 - Created one plot for K and another for NO3
 - Created an aggregated graph using the `patchwork` package!
 ```{r}
@@ -172,5 +172,4 @@ k_summary_plot / n_summary_plot
 
 # To Do
 - results/ analysis
-- clean excess code/ document
 
