@@ -16,6 +16,33 @@ Stream water data collected weekly from 1988 to 2012 at Luquillo Mountain in Pue
 Our research focuses on comparing K and NO3 concentrations at the different sites before and after Hurricane Hugo in September 1989.
 
 
+
+
+# Collaborative workflow
+
+Data is stored on our shared server at Bren (Taylor) and our repository is git-controlled on github and enabled us to access through our personal accounts on the Taylor server.
+
+### Initial approach
+```{r}
+!(images/oldworkflow.jpg)
+```
+
+
+
+### Final approach
+image
+
+
+## Git workflow
+
+Alex Vand created the github repository. Desik Somasundaram and Mia Forsline cloned the repo and made changes on their virtual machine account and then pushed changes back to the github repo.
+
+
+## Pair programming
+
+Our group used the pair programming approach with one driver and two navigators. The navigators searched online to support the driver and also examined the metadata to ensure consistency and accuracy among the different datasets.
+
+
 # Attach required packages
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -131,28 +158,6 @@ n_summary_plot <- ggplot(data = combined_summary, aes(x = year, y = mean_no3)) +
 
 k_summary_plot / n_summary_plot
 ```
-
-
-
-# Collaborative workflow
-
-Data is stored on our shared server at Bren (Taylor) and our repository is git-controlled on github and enabled us to access through our personal accounts on the Taylor server.
-
-### Initial approach
-image
-
-### Final approach
-image
-
-
-## Git workflow
-
-Alex Vand created the github repository. Desik Somasundaram and Mia Forsline cloned the repo and made changes on their virtual machine account and then pushed changes back to the github repo.
-
-
-## Pair programming
-
-Our group used the pair programming approach with one driver and two navigators. The navigators searched online to support the driver and also examined the metadata to ensure consistency and accuracy among the different datasets.
 
 
 # To Do
