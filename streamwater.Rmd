@@ -169,6 +169,13 @@ n_summary_plot <- ggplot(data = combined_summary, aes(x = year,
 k_summary_plot / n_summary_plot
 ```
 
+## Hurricane paths from 1988 to 2012
+![](images/hurricane_map.PNG)
+
+![](images/table.PNG)
+
+## Site map
+![](images/PR-LTER-Map.PNG)
 
 ## Results & Analysis
 
@@ -189,6 +196,9 @@ H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New Yor
 
 Kirill Müller (2020). here: A Simpler Way to Find Your Files. R package version 1.0.1.
   https://CRAN.R-project.org/package=here
+  
+National Oceanic and Atmospheric Administration (NOAA). (n.d.). Historical Hurricane Tracks. Office for Coastal
+Management. Retrieved August 27, 2021, from https://coast.noaa.gov/hurricanes/#map=4/32/-80
   
 Sam Firke (2021). janitor: Simple Tools for Examining and Cleaning Dirty Data. R package version 2.1.0.
   https://CRAN.R-project.org/package=janitor
