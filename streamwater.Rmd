@@ -51,7 +51,7 @@ The collaborative workflow was a new experience for our team so we had to get ac
 
 ## Attach required packages
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 library(tidyverse)
 library(here)
 library(janitor)
