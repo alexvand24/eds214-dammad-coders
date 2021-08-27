@@ -4,7 +4,7 @@ output:
   html_document:
       code_folding: show
 author: Mia Forsline, Desik Somasundaram, Alex Vand
-date: 2021-08-25
+date: 2021-08-27
 ---
 
 Contact: mforsline@bren.ucsb.edu, asy@bren.ucsb.edu, desik@bren.ucsb.edu
@@ -20,7 +20,8 @@ Our research focuses on comparing K and NO3 concentrations at the different site
 
 # Collaborative workflow
 
-Data is stored on our shared server at Bren (Taylor) and our repository is git-controlled on github and enabled us to access through our personal accounts on the Taylor server.
+The raw data is stored on our shared server at Bren (Taylor). Our project repository is git-controlled on github, which we can access through our personal accounts on the Taylor server.
+
 
 ### Initial approach
 ![Old Workflow.](images/oldworkflow.jpg)
@@ -49,9 +50,11 @@ We also had some issues with the remote server lagging which required killing ac
 The collaborative workflow was a new experience for our team so we had to get acquainted with everyone's pace and learn to speak in technical language that is easy to understand for everyone in the group, especially during pair programming.
 
 
-# Attach required packages
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+# Code
+
+## Attach required packages
+```{r setup, message = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 library(tidyverse)
 library(here)
 library(janitor)
@@ -61,7 +64,7 @@ library(patchwork)
 ```
 
 
-# Read in the data, identifying unique NA values
+## Read in the data, identifying unique NA values
 ```{r}
 qc1 <- read_csv("/courses/EDS214/eds214-dammad-coders/data/raw_data/QuebradaCuenca1-Bisley.csv", na = c("-9999", "-9999.00", "-9999.0")) %>% 
   clean_names()
@@ -77,11 +80,12 @@ mpr <- read_csv("/courses/EDS214/eds214-dammad-coders/data/raw_data/RioMameyesPu
 ```
 
 
-# Clean/wrangle the data
+## Clean/wrangle the data
 - Select variables (columns) of interest
 - Converted the date to ISO 8601 format
 - Renamed columns to include units
 - Combined all four datasets
+
 ```{r}
 qc1_clean <- qc1 %>% 
   select(sample_id, code, sample_date, k, no3) %>% 
@@ -116,7 +120,7 @@ combined_summary <- combined_sites %>%
             mean_no3 = mean(no3_ug_L, na.rm = TRUE))
 ```
 
-# Plotting the data
+## Plotting the data
 - Created one plot for K and another for NO3
 - Created an aggregated graph using the `patchwork` package!
 ```{r}
@@ -140,7 +144,7 @@ k / n
 ```
 
 
-## Summary plot
+## Summary Plot
 
 ```{r}
 k_summary_plot <- ggplot(data = combined_summary, aes(x = year,
@@ -149,10 +153,11 @@ k_summary_plot <- ggplot(data = combined_summary, aes(x = year,
   geom_line(aes(color = site_id)) +
   theme_classic() +
   theme(axis.title.x = element_blank(),
-        legend.position = "none") +
+        legend.position = "none",
+        plot.title = element_text(hjust = 0.5)) +
   labs(y = "K (mg/L)",
        color = "Sites",
-       title = "Potassium and nitrate concentrations for stream water in Luquillo Mountain")
+       title = "Potassium and nitrate annual mean concentrations \n for stream water in Luquillo Mountain")
 
 n_summary_plot <- ggplot(data = combined_summary, aes(x = year,
                                                       y = mean_no3,
@@ -170,7 +175,24 @@ k_summary_plot / n_summary_plot
 ```
 
 
-# To Do
-- results/ analysis
-- clean excess code/ document
+## Results & Analysis
+
+Streamwater chemistry variance appears to be correlated with external factors, such as extreme weather events. We see a spike in potassium and nitrate concentrations at all four sites around 1990, coinciding with Hurricane Hugo, which occurred in September 1989. There is another distinct peak in nitrate concentration (specifically at MPR) around 1998, which corresponds with Hurricane Georges.
+
+Nitrate concentration data was not consistently collected from July 1994 to October 1996.
+
+
+
+## Further Research
+
+We are interested to determine the statistical significance of our findings and to further explore hypotheses for the high potassium concentration and low nitrate concentration around 1993. Furthermore, would like to expand this research with the most current data.
+
+
+
+
+
+
+
+
+
 
