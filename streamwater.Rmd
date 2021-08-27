@@ -152,7 +152,7 @@ k_summary_plot <- ggplot(data = combined_summary, aes(x = year,
         legend.position = "none") +
   labs(y = "K (mg/L)",
        color = "Sites",
-       title = "Potassium and nitrate concentrations for stream water in Luquillo Mountain")
+       title = "Potassium and nitrate annual mean concentrations for stream water in Luquillo Mountain")
 
 n_summary_plot <- ggplot(data = combined_summary, aes(x = year,
                                                       y = mean_no3,
@@ -179,7 +179,7 @@ k_summary_plot / n_summary_plot
 
 ## Results & Analysis
 
-Streamwater chemistry variance appears to be correlated with external factors, such as extreme weather events. We see a spike in potassium and nitrate concentrations at all four sites around 1990, coinciding with Hurricane Hugo, which occurred in September 1989. There is another distinct peak in nitrate concentration (specifically at MPR) around 1998, which corresponds with Hurricane Georges.
+Streamwater chemistry variance appears to be correlated with external factors, such as extreme weather events. We see a spike in potassium and nitrate concentrations at all four sites around 1990, coinciding with Hurricane Hugo, which occurred in September 1989. A peak in 1996 is visible in the potassium data, however it's inconclusive due to missing data in nitrate concentrations. There is another distinct peak in nitrate concentration (specifically at MPR) around 1998, which corresponds with Hurricane Georges. Generally the water chemistry is more responsive to the stronger hurricanes (Catergory 4 and above).
 
 Nitrate concentration data was not consistently collected from July 1994 to October 1996.
 
