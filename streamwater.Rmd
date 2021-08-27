@@ -23,11 +23,11 @@ Our research focuses on comparing K and NO3 concentrations at the different site
 Data is stored on our shared server at Bren (Taylor) and our repository is git-controlled on github and enabled us to access through our personal accounts on the Taylor server.
 
 ### Initial approach
-![Old Workflow.](/images/oldworkflow.jpg)
+![Old Workflow.](images/oldworkflow.jpg)
 
 
 ### Final approach
-image
+![New Workflow.](images/newworkflow.jpg)
 
 
 ## Git workflow
@@ -38,6 +38,15 @@ Alex Vand created the github repository. Desik Somasundaram and Mia Forsline clo
 ## Pair programming
 
 Our group used the pair programming approach with one driver and two navigators. The navigators searched online to support the driver and also examined the metadata to ensure consistency and accuracy among the different datasets.
+
+## Challenges
+
+One of key challenges was establishing the initial Github workflow among team members.
+We had issues regarding push/pull permissions and Personal Access Tokens on the remote server that had to resolved before proceeding with our coding. 
+
+We also had some issues with the remote server lagging which required killing active R sessions and restarting.
+
+The collaborative workflow was a new experience for our team so we had to get acquainted with everyone's pace and learn to speak in technical language that is easy to understand for everyone in the group, especially during pair programming.
 
 
 # Attach required packages
@@ -131,7 +140,7 @@ k / n
 ```
 
 
-## summary plot
+## Summary plot
 
 ```{r}
 k_summary_plot <- ggplot(data = combined_summary, aes(x = year,
@@ -162,10 +171,6 @@ k_summary_plot / n_summary_plot
 
 
 # To Do
-- title
 - results/ analysis
-- challenges
 - clean excess code/ document
-- add images
-- fix legend(s)
 
