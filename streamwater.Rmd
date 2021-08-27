@@ -118,7 +118,7 @@ k <- ggplot(data = combined_sites, aes(x = sample_date, y = k_mg_L))+
   theme(axis.title.x = element_blank())+
   labs(y = "K (mg/L)",
        color = "Sites",
-       title = "TITLE")
+       title = "Potassium and nitrate concentrations for stream water in Luquillo Mountain")
 
 n <- ggplot(data = combined_sites, aes(x = sample_date, y = no3_ug_L))+
   geom_line(aes(color = site_id)) +
@@ -135,23 +135,27 @@ k / n
 
 ```{r}
 k_summary_plot <- ggplot(data = combined_summary, aes(x = year,
-                                                      y = mean_k))+
-  geom_point(aes(color = site_id, shape = site_id),
-            show.legend = FALSE) +
-  geom_line(aes(color = site_id)) +
-  theme_classic() +
-  theme(axis.title.x = element_blank())+
-  labs(y = "K (mg/L)",
-       color = "Sites",
-       title = "TITLE")
-
-n_summary_plot <- ggplot(data = combined_summary, aes(x = year, y = mean_no3)) +
+                                                      y = mean_k)) +
   geom_point(aes(color = site_id, shape = site_id)) +
   geom_line(aes(color = site_id)) +
   theme_classic() +
+  theme(axis.title.x = element_blank(),
+        legend.position = "none") +
+  labs(y = "K (mg/L)",
+       color = "Sites",
+       title = "Potassium and nitrate concentrations for stream water in Luquillo Mountain")
+
+n_summary_plot <- ggplot(data = combined_summary, aes(x = year,
+                                                      y = mean_no3,
+                                                      shape = site_id,
+                                                      color = site_id)) +
+  geom_point() +
+  geom_line() +
+  theme_classic() +
   labs(x = "Year",
        y = expression(paste(NO[3]-N, " ",(mu *g/L))),
-       color = "Sites")
+       color = "Sites",
+       shape = "Sites")
 
 k_summary_plot / n_summary_plot
 ```
